@@ -1,10 +1,11 @@
 def day_odd(day_):
     return day_ % 7
 
-def month_day(month):
+def month_day(month,year):
     odd_day = 0
+    if year % 4 == 0 and month > 2:
+        odd_day += 1
     if month < 7:
-
         for i in range(1, month):
             if i == 2:
                 continue
@@ -51,7 +52,8 @@ def day(day_,month,year):
         l_p = rem // 4
         n_y = rem - l_p
         odd_day += (2* l_p + n_y) % 7
-        odd_day += (month_day(month) + day_odd(day_)) % 7
+        # print(month_day(month,year),day_odd(day_))
+        odd_day += (month_day(month,year) + day_odd(day_)) % 7
     return odd_day
 
 
@@ -64,5 +66,4 @@ if __name__=='__main__':
     date = list(map(lambda x:int(x),date))
     day_ = ['sun','mon','tue','wed','thu','fri','sat','sun']
     result = day(date[0],date[1],date[2])
-    print(day_[result])
-
+    print(day_[result%7])
